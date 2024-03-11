@@ -1,8 +1,13 @@
+import { dirname } from 'node:path'
+
 export interface ServerConfig {
   apiUrl: string
+  cwd: string
   host: string
   port: string
 }
+
+const cwd = dirname(import.meta.url).replace('file://', '')
 
 export function getServerConfig(): ServerConfig {
   const requiredEnvVars = [
@@ -22,6 +27,7 @@ export function getServerConfig(): ServerConfig {
 
   return {
     apiUrl,
+    cwd,
     host,
     port,
   }

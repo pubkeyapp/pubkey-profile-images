@@ -1,4 +1,4 @@
-# PubKey Dynamic Images
+# PubKey Profile Images
 
 Experiment for generating dynamic images.
 
@@ -23,7 +23,7 @@ Experiment for generating dynamic images.
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/pubkeyapp/pubkey-dynamic-images my-app
+git clone https://github.com/pubkeyapp/pubkey-profile-images my-app
 cd my-app
 pnpm install
 ```

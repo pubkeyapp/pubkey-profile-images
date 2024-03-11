@@ -1,23 +1,21 @@
 import express from 'express'
 import { existsSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { join } from 'node:path'
 import favicon from 'serve-favicon'
 import { ServerConfig } from './server-config'
 import { serverRouter } from './server-router'
-
-const dir = dirname(import.meta.url).replace('file://', '')
 
 export async function server(config: ServerConfig) {
   // Set up Express server
   const app = express()
   // Set up favicon
-  app.use(favicon(join(dir, 'assets', 'favicon.ico')))
+  app.use(favicon(join(config.cwd, 'assets', 'favicon.ico')))
   // Parse JSON
   app.use(express.json())
   // Set base path to /api
-  app.use('/api', serverRouter())
+  app.use('/api', serverRouter(config))
   // Serve static files
-  const staticPath = setupAssets(app, dir)
+  const staticPath = setupAssets(app, config.cwd)
 
   // Start server
   app.listen(Number(config.port), config.host).on('listening', async () => {
